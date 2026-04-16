@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spencer's Photography Page</title>
+    <link rel="stylesheet" href="css/myStyles.css">
+</head>
+
+<body>
+
+    <div id="top" class="header">
+        <a href="index.html">Return to my main site</a>
+        <a href="ai.html">Play my guessing game!</a>
+        <h1>Spencer Pratt's Photography</h1>
+        <h2>Places he's taken photos and places he wants to take photos.</h2>
+    </div>
+
+    <div class="body">
+
+        <p>
+            After moving to Japan, and as I saw the beauty of Japan, I became very 
+            obsessed with capturing the beauty that is Japan. I began taking 
+            lots of photos on phone of all the beautiful things that I saw. And 
+            before I knew it, I had fallen in love with photography. 
+            Here are a few photos of my own. Please enjoy.
+        </p>
+
+        <!-- PHOTO BLOCKS -->
+        <div class="photo-block">
+            <img src="assets/img/BangkokThailand.jpeg" alt="Bangkok, Thailand">
+            <h6>Bangkok, Thailand (December, 2023)</h6>
+        </div>
+
+        <div class="photo-block">
+            <img src="assets/img/MiyajimaIsland.jpeg" alt="Miyajima Island, Japan">
+            <h6>Miyajima Island, Japan (May, 2024)</h6>
+        </div>
+
+        <div class="photo-block">
+            <img src="assets/img/BarronGorge.jpeg" alt="Barron Gorge, Australia">
+            <h6>Barron Gorge, Australia (April, 2025)</h6>
+        </div>
+
+        <div class="photo-block">
+            <img src="assets/img/ProvoUtah.jpeg" alt="Provo, Utah">
+            <h6>Provo, Utah (November, 2025)</h6>
+        </div>
+
+        <div class="photo-block">
+            <img src="assets/img/PrescottArizona.jpeg" alt="Prescott, Arizona">
+            <h6>Prescott, Arizona (December, 2025)</h6>
+        </div>
+
+        <div class="photo-block">
+            <img src="assets/img/BYUProvo.jpeg" alt="BYU Provo, Utah">
+            <h6>BYU Provo, Utah (March, 2026)</h6>
+        </div>
+
+        <h3>Places I want to take photos of and why</h3>
+
+        <ol>
+            <li>Lofoten Islands, Norway
+                <ul>
+                    <li>Insane dramatic landscapes</li>
+                    <li>Colourful fishing villages</li>
+                    <li>Long lasting golden hour lighting</li>
+                </ul>
+            </li>
+
+            <li>Stockholm Archipelago, Sweden
+                <ul>
+                    <li>Over 30,000 islands</li>
+                    <li>Soft Scandinavian light</li>
+                    <li>Classic red Swedish cabins</li>
+                </ul>
+            </li>
+
+            <li>Nyhavn, Denmark
+                <ul>
+                    <li>Iconic rainbow coloured buildings</li>
+                    <li>Reflections on the water</li>
+                    <li>Warm and cold Scandinavian vibes</li>
+                </ul>
+            </li>
+
+            <li>El Nido, Philippines
+                <ul>
+                    <li>Crystal clear water and limestone cliffs</li>
+                    <li>Hidden lagoons and beaches</li>
+                    <li>Insane colour contrast</li>
+                </ul>
+            </li>
+
+            <li>Milford Sound, New Zealand
+                <ul>
+                    <li>Towering fjords and waterfalls</li>
+                    <li>Crazy calm water reflections</li>
+                    <li>Wild and untouched nature</li>
+                </ul>
+            </li>
+        </ol>
+
+        <br><br>
+
+        <!-- VIDEO BLOCK -->
+        <h3>And here's a photography video</h3>
+        <div class="video-container">
+            <iframe 
+                src="https://www.youtube.com/embed/fulGtyJQfhI"
+                title="How to start photography"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <br><br>
+
+        <!-- TABLEAU BLOCK -->
+        <h3>Cool Tableau Visualization</h3>
+        <div class='tableauPlaceholder' id='vizPhotography' style='position: relative'>
+            <noscript>
+                <a href='#'>
+                    <img alt='Photography'
+                        src='https://public.tableau.com/static/images/Ph/Photography/Photography/1.png'
+                        style='border: none' />
+                </a>
+            </noscript>
+
+            <object class='tableauViz' style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='site_root' value='' />
+                <param name='name' value='Photography/Photography' />
+                <param name='tabs' value='no' />
+                <param name='toolbar' value='no' />
+                <param name='static_image'
+                    value='https://public.tableau.com/static/images/Ph/Photography/Photography/1.png' />
+                <param name='animate_transition' value='yes' />
+                <param name='display_static_image' value='yes' />
+                <param name='display_spinner' value='yes' />
+                <param name='display_overlay' value='yes' />
+                <param name='display_count' value='yes' />
+                <param name='language' value='en-US' />
+            </object>
+        </div>
+
+        <script type='text/javascript'>
+            var divElement = document.getElementById('vizPhotography');
+            var vizElement = divElement.getElementsByTagName('object')[0];
+
+            if (divElement.offsetWidth > 800) {
+                vizElement.style.width = '100%';
+                vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';
+            } else if (divElement.offsetWidth > 500) {
+                vizElement.style.width = '100%';
+                vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';
+            } else {
+                vizElement.style.width = '100%';
+                vizElement.style.height = '2400px';
+            }
+
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
+
+    </div>
+
+    <footer class="footer-box">
+        <p>© 2026 Spencer Pratt — Photography Scratch Page</p>
+        <a href="#top">Back to top</a>
+    </footer>
+
+</body>
+</html>

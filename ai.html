@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dodge the Blocks!</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e8f0ff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #gameArea {
+            width: 400px;
+            height: 500px;
+            background: white;
+            border: 3px solid #4a6cff;
+            border-radius: 10px;
+            margin: auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #player {
+            width: 40px;
+            height: 40px;
+            background-color: #4a6cff;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 10px;
+            left: 180px;
+        }
+
+        .block {
+            width: 40px;
+            height: 40px;
+            background-color: #ff4a4a;
+            border-radius: 5px;
+            position: absolute;
+            top: -50px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            background-color: #4a6cff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #2f4fe0;
+        }
+
+        #stats {
+            font-size: 18px;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        #playAgain {
+            display: none;
+            background-color: #28a745;
+        }
+
+        #playAgain:hover {
+            background-color: #1e7e34;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Dodge the Blocks!</h1>
+    <p>Use the <strong>left</strong> and <strong>right</strong> arrow keys to move.  
+    Blocks get faster the longer you survive!</p>
+
+    <div id="gameArea">
+        <div id="player"></div>
+    </div>
+
+    <button id="startBtn" onclick="startGame()">Start Game</button>
+    <button id="playAgain" onclick="resetGame()">Play Again</button>
+
+    <p id="stats">Time: 0s | High Score: 0s</p>
+
+    <script>
+        const gameArea = document.getElementById("gameArea");
+        const player = document.getElementById("player");
+        const stats = document.getElementById("stats");
+        const startBtn = document.getElementById("startBtn");
+        const playAgainBtn = document.getElementById("playAgain");
+
+        let playerX = 180;
+        let blocks = [];
+        let gameInterval;
+        let blockInterval;
+        let timerInterval;
+        let timeSurvived = 0;
+        let highScore = 0;
+        let gameRunning = false;
+
+        // Difficulty variables
+        let fallSpeed = 5;       // increases over time
+        let spawnRate = 800;     // decreases over time (faster spawns)
+
+        // Move player with arrow keys
+        document.addEventListener("keydown", (e) => {
+            if (!gameRunning) return;
+
+            if (e.key === "ArrowLeft" && playerX > 0) {
+                playerX -= 50;
+            }
+            if (e.key === "ArrowRight" && playerX < 360) {
+                playerX += 50;
+            }
+            player.style.left = playerX + "px";
+        });
+
+        function startGame() {
+            gameRunning = true;
+            startBtn.style.display = "none";
+            playAgainBtn.style.display = "none";
+
+            timeSurvived = 0;
+            fallSpeed = 5;
+            spawnRate = 800;
+
+            stats.textContent = `Time: 0s | High Score: ${highScore}s`;
+
+            // Start timers
+            timerInterval = setInterval(() => {
+                timeSurvived++;
+                stats.textContent = `Time: ${timeSurvived}s | High Score: ${highScore}s`;
+
+                // Increase difficulty every second
+                fallSpeed += 0.3;
+
+                // Every 5 seconds, spawn faster
+                if (timeSurvived % 5 === 0 && spawnRate > 300) {
+                    spawnRate -= 80;
+                    restartBlockSpawner();
+                }
+
+            }, 1000);
+
+            // Spawn blocks
+            blockInterval = setInterval(createBlock, spawnRate);
+
+            // Move blocks
+            gameInterval = setInterval(updateBlocks, 20);
+        }
+
+        function restartBlockSpawner() {
+            clearInterval(blockInterval);
+            blockInterval = setInterval(createBlock, spawnRate);
+        }
+
+        function createBlock() {
+            const block = document.createElement("div");
+            block.classList.add("block");
+            block.style.left = Math.floor(Math.random() * 360) + "px";
+            gameArea.appendChild(block);
+            blocks.push(block);
+        }
+
+        function updateBlocks() {
+            for (let i = 0; i < blocks.length; i++) {
+                const block = blocks[i];
+                let top = parseInt(block.style.top || "-50");
+
+                block.style.top = top + fallSpeed + "px";
+
+                // Collision detection
+                if (isColliding(player, block)) {
+                    endGame();
+                }
+
+                // Remove blocks that fall off screen
+                if (top > 550) {
+                    block.remove();
+                    blocks.splice(i, 1);
+                    i--;
+                }
+            }
+        }
+
+        function isColliding(a, b) {
+            const aRect = a.getBoundingClientRect();
+            const bRect = b.getBoundingClientRect();
+
+            return !(
+                aRect.bottom < bRect.top ||
+                aRect.top > bRect.bottom ||
+                aRect.right < bRect.left ||
+                aRect.left > bRect.right
+            );
+        }
+
+        function endGame() {
+            gameRunning = false;
+
+            clearInterval(gameInterval);
+            clearInterval(blockInterval);
+            clearInterval(timerInterval);
+
+            // Update high score
+            if (timeSurvived > highScore) {
+                highScore = timeSurvived;
+            }
+
+            stats.textContent = `You lasted ${timeSurvived}s! High Score: ${highScore}s`;
+
+            // Remove all blocks
+            blocks.forEach(b => b.remove());
+            blocks = [];
+
+            playAgainBtn.style.display = "inline-block";
+        }
+
+        function resetGame() {
+            playerX = 180;
+            player.style.left = "180px";
+            startGame();
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+/* Remove default browser spacing */
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* prevents horizontal scroll */
+}
+
+/* Header */
+.header {
+    background-color: #d9e6ff;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Main body */
+.body {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    color: #222;
+}
+
+/* Photo blocks */
+.photo-block {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.photo-block img {
+    width: 60%;
+    max-width: 600px;
+    border-radius: 8px;
+}
+
+/* Video */
+.video-container iframe {
+    width: 100%;
+    max-width: 560px;
+    height: 315px;
+    border: none;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Tableau */
+.tableau-container iframe {
+    width: 100%;
+    max-width: 900px;
+    height: 600px;
+    border: none;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Footer */
+.footer-box {
+    background-color: #d9e6ff;
+    padding: 20px;
+    margin-top: 40px;
+    border-top: 2px solid #aac4ff;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.footer-box a {
+    color: #003366;
+    text-decoration: none;
+}
+
+.footer-box a:hover {
+    text-decoration: underline;
+}
